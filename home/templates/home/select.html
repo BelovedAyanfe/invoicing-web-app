@@ -1,0 +1,67 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Select</title> 
+    {% load bootstrap5 %} 
+    {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="{% static 'css/bootstrap.min.css' %}">  
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>    
+    {% block title %}
+        <h3 class="container"></h3>
+    {% endblock title %}
+</head>  
+<body class="bg-light">
+    {% block content %}
+    <div class="container">
+        <h1 class="m-auto navbar navbar-dark bg-primary d-flex justify-content-center m-4">
+            Invoice
+        </h1>
+        <div> 
+            <h4 class="fs-3 d-flex justify-content-center">Select Items</h4>
+        </div>
+    </div>    
+    <div class="container">
+        <a href="address" class="text-white fs-4 btn btn-primary">Address</a>
+    </div>
+    <div class="d-flex container fs-4 justify-content-center">
+        <form action="list" enctype="multipart/form-data" method="post" novalidate>
+            <table class="">
+                {{ form.as_table }}
+                <tr>
+                    <td><input type="submit" value="submit"></td>
+                </tr>
+            </table>
+            {% csrf_token %}
+        </form>
+    </div>
+    <div class="container mb-3 pt-3">
+        <table class="table table-striped table-bordered">
+            <tr class="p-3">
+                <th class="p-3 fs-3">Item</th>
+                <th class="p-3 fs-3">Quantity</th>
+                <th class="p-3 fs-3">$ Price</th>
+            </tr> 
+            {% for select in all_invoices %}
+                <tr>
+                    <td class="fs-4">{{ select.item }}</td>
+                    <td class="fs-4">{{ select.quantity }}</td>
+                    <td class="fs-4">{{ select.price }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="list" class="text-white btn btn-primary fs-4">Add more items</a>
+    </div>        
+    {% buttons %}
+        <p class="container d-flex justify-content-center">
+            <a href="show" class="btn btn-primary btn-lg mx-3 mt-3">Click to generate invoice</a>
+        </p>
+    {% endbuttons %}   
+    {% endblock content %}    
+</body>  
+</html> 
+
+
+
+

@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Invoice</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  </head>
+  <header class="main">
+    <div class="header mt-2">
+      <h1>INVOICE</h1>
+    </div>
+  </header>
+  <body class="bg-light">
+    {% block content %}        
+    <main class="form-signin baseform w-100 text-center">
+      <form method="GET" action="{% url 'select' %}" class="">{%  csrf_token %}
+        <img class="mb-4 w-50" src="/static/invoice_logo.png" alt="" >
+        <h1 class="h3 mb-3 fw-normal"><b>Please Sign In</b></h1>
+    
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        </br>
+    
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017 – 2022</p>
+      </form>
+      <div>        
+        <p class='mx-3'>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+        <input type="hidden" name="next" value="{{ next }}"/>
+        
+      </div>
+    </main>
+    
+    {% endblock content %}
+  </body>
+</html>
